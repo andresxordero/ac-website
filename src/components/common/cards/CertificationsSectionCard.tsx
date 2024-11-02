@@ -1,7 +1,6 @@
-/* eslint-disable tailwindcss/migration-from-tailwind-2 */
+import { useState } from 'react';
 import { CertificationsSectionCardProps } from '@mocks/CertificationsSectionMocks';
 import { HiOutlineExternalLink } from 'react-icons/hi';
-
 import { Button } from '../Button';
 
 export default function CertificationsSectionCard({
@@ -10,14 +9,21 @@ export default function CertificationsSectionCard({
   title,
   subtitle,
 }: CertificationsSectionCardProps) {
+  const [isGrabbing, setIsGrabbing] = useState(false);
+
   const handleOpenLink = () => {
     window.open(link, '_blank');
   };
 
   return (
     <div
-      className="relative flex h-full flex-col justify-between rounded-2xl bg-[var(--soft-light-gray)] bg-cover bg-center p-6 text-[var(--black)]"
+      className={`relative flex h-full flex-col justify-between rounded-2xl bg-[var(--soft-light-gray)] bg-cover bg-center p-6 text-[var(--black)] ${
+        isGrabbing ? 'cursor-grabbing' : 'cursor-grab'
+      }`}
       aria-label={alt}
+      onMouseDown={() => setIsGrabbing(true)}
+      onMouseUp={() => setIsGrabbing(false)}
+      onMouseLeave={() => setIsGrabbing(false)}
     >
       <div className="">
         <p className="animate-gradient-random font-syne inline-block rounded-full bg-[var(--soft-light-gray)] bg-opacity-50 bg-gradient-to-r from-[var(--deep-navy-blue)] via-[var(--vibrant-sky-blue)] to-[var(--magenta-pink)] p-1 px-4 text-base font-semibold text-[var(--white)]">

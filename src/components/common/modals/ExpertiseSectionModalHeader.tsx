@@ -28,7 +28,7 @@ export default function ExpertiseSectionModalHeader({
   };
 
   return (
-    <div className="w-full rounded-2xl shadow-md ">
+    <div className="w-full rounded-2xl shadow-md">
       <div
         className="text-[var(--white)] border-b border-[var(--gray)] py-4 cursor-pointer flex justify-between items-center"
         onClick={toggleExpand}
@@ -45,32 +45,42 @@ export default function ExpertiseSectionModalHeader({
         </span>
       </div>
 
-      {isExpanded && (
-        <div className="flex justify-around items-center pt-8 transition-all duration-300 ease-in-out">
-          {expertiseData.images.map((image, index) => (
-            <div key={index} className="relative">
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="size-16 cursor-pointer"
-                onMouseEnter={() => handleMouseEnter(index)}
-                onMouseLeave={handleMouseLeave}
-              />
-              {hoveredIndex === index && (
-                <motion.div
-                  className="absolute mt-4 bg-[var(--white)] border border-[var(--gray)] text-[var(--black)] text-base font-syne font-bold rounded-full px-2 py-1"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {image.alt}
-                </motion.div>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
+      <motion.div
+        initial={{ height: 0, opacity: 0 }}
+        animate={{
+          height: isExpanded ? 'auto' : 0,
+          opacity: isExpanded ? 1 : 0,
+        }}
+        transition={{ duration: 0.4, ease: 'easeInOut' }}
+        className="overflow-hidden"
+      >
+        {isExpanded && (
+          <div className="flex justify-around items-center pt-8">
+            {expertiseData.images.map((image, index) => (
+              <div key={index} className="relative">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="size-16 "
+                  onMouseEnter={() => handleMouseEnter(index)}
+                  onMouseLeave={handleMouseLeave}
+                />
+                {hoveredIndex === index && (
+                  <motion.div
+                    className="absolute mt-4 bg-[var(--white)] border border-[var(--gray)] text-[var(--black)] text-base font-syne font-bold rounded-full px-2 py-1"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {image.alt}
+                  </motion.div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </motion.div>
     </div>
   );
 }
