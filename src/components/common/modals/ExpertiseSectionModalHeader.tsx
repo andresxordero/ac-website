@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ExpertiseSectionImage } from '@mocks/ExpertiseSectionMocks';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 
@@ -45,42 +45,44 @@ export default function ExpertiseSectionModalHeader({
         </span>
       </div>
 
-      <motion.div
-        initial={{ height: 0, opacity: 0 }}
-        animate={{
-          height: isExpanded ? 'auto' : 0,
-          opacity: isExpanded ? 1 : 0,
-        }}
-        transition={{ duration: 0.4, ease: 'easeInOut' }}
-        className="overflow-hidden"
-      >
+      <AnimatePresence initial={false}>
         {isExpanded && (
-          <div className="flex justify-around items-center pt-8">
-            {expertiseData.images.map((image, index) => (
-              <div key={index} className="relative">
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="size-16 "
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.4, ease: 'easeInOut' }}
+            className="overflow-hidden"
+          >
+            <div className="flex justify-around items-center pt-8">
+              {expertiseData.images.map((image, index) => (
+                <div
+                  key={index}
+                  className="relative"
                   onMouseEnter={() => handleMouseEnter(index)}
                   onMouseLeave={handleMouseLeave}
-                />
-                {hoveredIndex === index && (
-                  <motion.div
-                    className="absolute mt-4 bg-[var(--white)] border border-[var(--gray)] text-[var(--black)] text-base font-syne font-bold rounded-full px-2 py-1"
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {image.alt}
-                  </motion.div>
-                )}
-              </div>
-            ))}
-          </div>
+                >
+                  <img src={image.src} alt={image.alt} className="size-16" />
+
+                  <AnimatePresence>
+                    {hoveredIndex === index && (
+                      <motion.div
+                        className="absolute top-0 left-0 cursor-default transform -translate-x-1/2 -translate-y-full bg-[var(--white)] border border-[var(--gray)] text-[var(--black)] text-base font-syne font-bold rounded-full px-2 py-1"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {image.alt}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         )}
-      </motion.div>
+      </AnimatePresence>
     </div>
   );
 }
