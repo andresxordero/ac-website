@@ -34,10 +34,10 @@ export default function Header() {
           <img
             src="/assets/ac-website-icon.svg"
             alt="icon"
-            className="size-8"
+            className="size-12"
           />
-          <p className="font-syne flex items-center text-base">
-            andrés Cordero.
+          <p className="font-dm-sans flex items-center text-base font-extralight">
+            andrés cordero.
           </p>
         </div>
         <Button type="full-static" name="Language" style="WHITE" />
