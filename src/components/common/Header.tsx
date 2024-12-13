@@ -25,22 +25,22 @@ export default function Header() {
 
   return (
     <nav
-      className={`fixed top-0 z-50 w-full  bg-opacity-20 backdrop-blur-xl transition-transform duration-300 ${
+      className={`fixed top-0 z-50 w-full bg-opacity-20 backdrop-blur-xl transition-transform duration-300 ${
         showNavbar ? 'translate-y-0' : '-translate-y-full'
       }`}
     >
-      <div className="flex items-center justify-between px-8 py-4">
-        <div className="flex gap-4 text-xl font-bold">
+      <div className="flex items-center justify-center px-8 py-4">
+        <div className="flex items-center gap-4 text-xl font-bold">
           <img
             src="/assets/ac-website-icon.svg"
             alt="icon"
             className="size-12"
           />
-          <p className="font-dm-sans flex items-center text-base font-extralight">
-            andrés cordero.
-          </p>
+          {/* <p className="font-dm-sans flex items-center text-base font-extralight">
+            Andrés Cordero.
+          </p> */}
         </div>
-        <Button type="full-static" name="Language" style="WHITE" />
+        {/* <Button type="full-static" name="Language" style="WHITE" /> */}
       </div>
     </nav>
   );

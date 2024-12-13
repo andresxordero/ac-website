@@ -6,17 +6,17 @@
 import { useState } from 'react';
 
 import ProjectsSectionCard from '@components/common/cards/ProjectsSectionCard';
-import { certificationsSectionMocks } from '@mocks/CertificationsSectionMocks';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
+import { projectsSectionMocks } from '@mocks/ProjectsSectionMocks';
 
 export default function ProjectsSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [sliderRef, slider] = useKeenSlider({
     loop: true,
-    mode: 'free-snap',
+    mode: 'free',
     slides: {
-      perView: 1,
+      perView: 2,
       spacing: 0,
     },
     breakpoints: {
@@ -35,8 +35,8 @@ export default function ProjectsSection() {
   return (
     <section className=" w-full py-16">
       <div className="animate-gradient-random pointer-events-none bg-[var(--soft-light-gray)] bg-gradient-to-r from-[var(--deep-navy-blue)] via-[var(--vibrant-sky-blue)] to-[var(--magenta-pink)] ">
-        <div className="bg-gradient-to-l from-[var(--black)] to-transparent p-2 text-[var(--white)] ">
-          <div className="flex rounded-2xl bg-gradient-to-r from-[var(--black)]  to-transparent p-16 px-36">
+        <div className="bg-gradient-to-l from-[var(--black)] to-transparent text-[var(--white)] ">
+          <div className="flex bg-gradient-to-r from-[var(--black)]  to-transparent p-16 px-36">
             <h2 className="font-dm-sans flex flex-col justify-end  text-[6rem] font-bold leading-tight hover:cursor-default">
               My portfolio
             </h2>
@@ -47,20 +47,20 @@ export default function ProjectsSection() {
         </div>
       </div>
       <div ref={sliderRef} className="keen-slider">
-        {certificationsSectionMocks.map((certificationsSectionMock, index) => (
+        {projectsSectionMocks.map((projectsSectionMocks, index) => (
           <div key={index} className="keen-slider__slide">
             <ProjectsSectionCard
-              title={certificationsSectionMock.title}
-              image="/assets/certifications-section/Agile.jpg"
-              alt={certificationsSectionMock.alt}
-              link={certificationsSectionMock.link}
+              title={projectsSectionMocks.title}
+              image={projectsSectionMocks.image}
+              link={projectsSectionMocks.link}
             />
           </div>
         ))}
       </div>
       <div className="mt-8 flex justify-center gap-4">
-        {certificationsSectionMocks.map((_, index2) => (
+        {projectsSectionMocks.map((_, index2) => (
           <button
+            title="ProjectsCarouselPages"
             key={index2}
             onClick={() => slider.current?.moveToIdx(index2)}
             className={`${
