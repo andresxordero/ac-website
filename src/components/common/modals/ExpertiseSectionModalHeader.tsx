@@ -30,6 +30,7 @@ export default function ExpertiseSectionModalHeader({
   return (
     <div className="w-full rounded-2xl shadow-md">
       <div
+        role="button"
         className="text-[var(--white)] border-b border-[var(--gray)] py-4 cursor-pointer flex justify-between items-center"
         onClick={toggleExpand}
       >

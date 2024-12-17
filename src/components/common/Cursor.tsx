@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 import { motion } from 'framer-motion';
 
 export default function Cursor() {
@@ -19,11 +18,26 @@ export default function Cursor() {
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      setClickable(
-        target.tagName === 'A' ||
-          target.tagName === 'BUTTON' ||
-          target.style.cursor === 'pointer',
+
+      const interactiveElement = target.closest(
+        'a, button, input, textarea, select, [role="button"], [onclick], [data-clickable="true"], .cursor-pointer',
       );
+
+      setClickable(!!interactiveElement);
+    };
+
+    const handleMouseOut = (e: MouseEvent) => {
+      const target = e.relatedTarget as HTMLElement | null;
+      if (!target) {
+        setClickable(false);
+        return;
+      }
+
+      const interactiveElement = target.closest(
+        'a, button, input, textarea, select, [role="button"], [onclick], [data-clickable="true"], .cursor-pointer',
+      );
+
+      setClickable(!!interactiveElement);
     };
 
     const handleDiscussionCarouselHover = (e: CustomEvent) => {
@@ -34,6 +48,7 @@ export default function Cursor() {
     window.addEventListener('mouseenter', handleMouseEnter);
     window.addEventListener('mouseleave', handleMouseLeave);
     window.addEventListener('mouseover', handleMouseOver);
+    window.addEventListener('mouseout', handleMouseOut);
     window.addEventListener(
       'discussionCarouselHover',
       handleDiscussionCarouselHover as EventListener,
@@ -49,11 +64,13 @@ export default function Cursor() {
     };
 
     animateDelayedPosition();
+
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseenter', handleMouseEnter);
       window.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener('mouseout', handleMouseOut);
       window.removeEventListener(
         'discussionCarouselHover',
         handleDiscussionCarouselHover as EventListener,
@@ -63,7 +80,7 @@ export default function Cursor() {
   }, [position]);
 
   const getScale = () => {
-    if (isInDiscussionCarousel) return 1.5;
+    if (isInDiscussionCarousel) return 1;
     if (clickable) return 1;
     if (active) return 0.6;
     return 0.6;
@@ -71,10 +88,14 @@ export default function Cursor() {
 
   const getCursorClassName = () => {
     const baseClasses =
-      'fixed left-0 top-0 z-50 rounded-full transition-colors duration-200 ease-out pointer-events-none  z-[9999] ';
+      'fixed left-0 top-0 z-50 rounded-full transition-colors duration-200 ease-out pointer-events-none z-[9999]';
 
     if (isInDiscussionCarousel) {
-      return `${baseClasses} flex items-center justify-center size-24 animate-gradient-random  bg-[var(--soft-light-gray)] bg-opacity-50 bg-gradient-to-r from-[var(--deep-navy-blue)] via-[var(--vibrant-sky-blue)] to-[var(--magenta-pink)] text-white`;
+      return `${baseClasses} flex items-center justify-center size-24 animate-gradient-random bg-[var(--soft-light-gray)] bg-opacity-50 bg-gradient-to-r from-[var(--deep-navy-blue)] via-[var(--vibrant-sky-blue)] to-[var(--magenta-pink)] text-white`;
+    }
+
+    if (clickable) {
+      return `${baseClasses} size-16 bg-[var(--white)] mix-blend-difference`;
     }
 
     if (active) {
@@ -100,7 +121,7 @@ export default function Cursor() {
       style={{ transform: 'translate(-50%, -50%)' }}
     >
       {isInDiscussionCarousel && (
-        <span className="text-center text-sm font-bold leading-tight  ">
+        <span className="text-center text-sm font-bold leading-tight">
           Let&apos;s get in touch
         </span>
       )}

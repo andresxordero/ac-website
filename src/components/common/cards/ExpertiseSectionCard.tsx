@@ -120,6 +120,8 @@ export default function ExpertiseSectionCard({
           </div>
         </div>
         <div
+          title="Open expertise detail modal"
+          role="button"
           className="absolute right-4  top-4 cursor-pointer animate-gradient-random hover:bg-[var(--soft-light-gray)] hover:border-[var(--black)] flex size-12 items-center justify-center rounded-full bg-gradient-to-r from-[var(--deep-navy-blue)] via-[var(--vibrant-sky-blue)] to-[var(--magenta-pink)] text-[var(--white)]"
           onClick={handleClick}
         >
