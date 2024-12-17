@@ -127,7 +127,7 @@ export default function ContactModal({ isOpen, onClose }: ModalProps) {
                       icon={FaTelegramPlane}
                       name="Telegram"
                       onClick={() =>
-                        window.open('https://wa.me/524777037913', '_blank')
+                        window.open('https://t.me/corderoandres', '_blank')
                       }
                     />
                   </div>
