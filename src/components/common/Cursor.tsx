@@ -80,7 +80,7 @@ export default function Cursor() {
   }, [position]);
 
   const getScale = () => {
-    if (isInDiscussionCarousel) return 1;
+    if (isInDiscussionCarousel) return 1.5;
     if (clickable) return 1;
     if (active) return 0.6;
     return 0.6;

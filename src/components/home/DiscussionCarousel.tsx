@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import ModalContact from '@components/common/modals/Modal';
+import ContactModal from '@components/common/modals/ContactModal';
 
 export default function DiscussionCarousel() {
   const [isHovered, setIsHovered] = useState(false);
@@ -31,14 +31,7 @@ export default function DiscussionCarousel() {
       >
         <h3 className="w-full text-[7vw]">Let&apos;s discuss your project</h3>
       </div>
-      <ModalContact
-        title="Let't talk"
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        paragraph="Test"
-      >
-        Test
-      </ModalContact>
+      <ContactModal isOpen={isModalOpen} onClose={closeModal} />
     </section>
   );
 }

@@ -2,6 +2,11 @@ import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { IoCloseSharp } from 'react-icons/io5';
 import { DynamicButton } from '../buttons/DynamicButton';
+import { FaCode, FaLinkedinIn, FaTelegramPlane } from 'react-icons/fa';
+import { IoLogoWhatsapp, IoMdMail } from 'react-icons/io';
+import { FaProjectDiagram } from 'react-icons/fa';
+import { ExpertiseContactSection } from '@components/home/ExpertiseContactSection';
+import { GrDocumentPerformance } from 'react-icons/gr';
 
 interface ModalProps {
   isOpen: boolean;
@@ -45,7 +50,7 @@ export default function ContactModal({ isOpen, onClose }: ModalProps) {
           transition={{ duration: 0.3 }}
         >
           <motion.div
-            className="relative flex w-[80%] shadow-lg bg-[var(--white)] rounded-2xl overflow-hidden"
+            className="relative flex w-[70%] shadow-lg bg-[var(--white)] rounded-2xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
             variants={modalVariants}
             initial="hidden"
@@ -54,17 +59,83 @@ export default function ContactModal({ isOpen, onClose }: ModalProps) {
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
           >
             <div className="flex-1 p-12">
-              <div className="flex items-center gap-4">
-                <img
-                  src="/assets/ac-website-icon.svg"
-                  alt="icon"
-                  className="size-12"
+              <div className="col-span-1 flex flex-col h-full">
+                <div className="flex items-center gap-4 pb-8">
+                  <img
+                    src="/assets/ac-website-icon.svg"
+                    alt="icon"
+                    className="size-8"
+                  />
+                  <p className="font-dm-sans font-light text-lg">
+                    andrés cordero
+                  </p>
+                </div>
+                <ExpertiseContactSection
+                  title="Project Management"
+                  text="Efficient planning and coordination to ensure project success."
+                  icon={FaProjectDiagram}
                 />
-                <p className="font-syne font-bold text-xl">Andrés Cordero</p>
+                <ExpertiseContactSection
+                  title="Software Development"
+                  text="Custom software solutions tailored to your business needs."
+                  icon={FaCode}
+                />
+                <ExpertiseContactSection
+                  title="Quality Assurance"
+                  text="Comprehensive QA strategies to maintain software excellence."
+                  icon={GrDocumentPerformance}
+                />
+
+                <div className=" flex items-center justify-start gap-4  mt-auto ">
+                  <div className="flex gap-6 pt-16">
+                    <DynamicButton
+                      style="WHITE"
+                      type="icon-only"
+                      icon={FaLinkedinIn}
+                      name="LinkedIn"
+                      onClick={() =>
+                        window.open(
+                          'https://www.linkedin.com/in/andresmcorderor/',
+                          '_blank',
+                        )
+                      }
+                    />
+                    <DynamicButton
+                      style="WHITE"
+                      type="icon-only"
+                      icon={IoMdMail}
+                      name="Email"
+                      onClick={() =>
+                        window.open(
+                          'mailto:andresmcorderor@gmail.com',
+                          '_blank',
+                        )
+                      }
+                    />
+                    <DynamicButton
+                      style="WHITE"
+                      type="icon-only"
+                      icon={IoLogoWhatsapp}
+                      name="WhatsApp"
+                      onClick={() =>
+                        window.open('https://wa.me/524777037913', '_blank')
+                      }
+                    />
+                    <DynamicButton
+                      style="WHITE"
+                      type="icon-only"
+                      icon={FaTelegramPlane}
+                      name="Telegram"
+                      onClick={() =>
+                        window.open('https://wa.me/524777037913', '_blank')
+                      }
+                    />
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="flex flex-col bg-[var(--black)] px-16 py-12 text-white w-[70%]">
+            <div className="flex flex-col bg-[var(--black)] px-16 py-12 text-white w-[65%]">
               <div className="absolute right-4 top-4" onClick={onClose}>
                 <DynamicButton
                   style="WHITE"
@@ -73,13 +144,14 @@ export default function ContactModal({ isOpen, onClose }: ModalProps) {
                   type="icon-only"
                 />
               </div>
-              <div className="text-[var(--white)] font-semibold pb-8 font-dm-sans text-5xl cursor-default">
-                Title
+              <div className="leading-tight text-[var(--white)] font-medium pb-4 font-dm-sans text-5xl cursor-default">
+                <p>Got ideas? I&apos;ve got the skills.</p>
+                <p>Let&apos;s team Up!</p>
               </div>
-              <p className="font-inter text-base font-extralight text-[var(--gray)] break-words cursor-default">
-                PAragrapg
+              <p className="font-inter pb-8 text-xl font-extralight text-[var(--gray)] break-words cursor-default">
+                Tell me more about yourself and what's on your mind
               </p>
-              parrafo
+              <p>parrafo</p>
             </div>
           </motion.div>
         </motion.div>

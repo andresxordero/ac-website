@@ -60,7 +60,7 @@ export default function Modal({
           transition={{ duration: 0.3 }}
         >
           <motion.div
-            className="relative w-[80%] shadow-lg bg-[var(--white)] rounded-2xl "
+            className="relative w-[80%] shadow-lg bg-[var(--white)] rounded-2xl"
             onClick={(e) => e.stopPropagation()}
             variants={modalVariants}
             initial="hidden"
@@ -72,7 +72,7 @@ export default function Modal({
               <div className="absolute right-4 top-4" onClick={onClose}>
                 <DynamicButton
                   style="WHITE"
-                  name="Become a client"
+                  name="CloseButton"
                   icon={IoCloseSharp}
                   type="icon-only"
                 />
