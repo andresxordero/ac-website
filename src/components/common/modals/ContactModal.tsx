@@ -60,15 +60,20 @@ export default function ContactModal({ isOpen, onClose }: ModalProps) {
           >
             <div className="flex-1 p-12">
               <div className="col-span-1 flex flex-col h-full">
-                <div className="flex items-center gap-4 pb-8">
-                  <img
-                    src="/assets/ac-website-icon.svg"
-                    alt="icon"
-                    className="size-8"
+                <div className="absolute right-4 top-4" onClick={onClose}>
+                  <DynamicButton
+                    style="WHITE"
+                    name="Close"
+                    icon={IoCloseSharp}
+                    type="icon-only"
                   />
-                  <p className="font-dm-sans font-light text-lg">
-                    andrés cordero
-                  </p>
+                </div>
+                <div className="flex items-center gap-0 pb-8">
+                  <img
+                    src="/assets/ac-website-icon-alt.svg"
+                    alt="icon"
+                    className="h-12"
+                  />
                 </div>
                 <ExpertiseContactSection
                   title="Project Management"
