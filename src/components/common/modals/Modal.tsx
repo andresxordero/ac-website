@@ -1,11 +1,18 @@
-import { useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
+
 import { motion, AnimatePresence } from 'framer-motion';
 import { IoCloseSharp } from 'react-icons/io5';
+import ExpertiseSectionModalHeader from './ExpertiseSectionModalHeader';
 import { DynamicButton } from '../buttons/DynamicButton';
 
 interface ModalProps {
   isOpen: boolean;
+  knowledgeSection?: boolean;
   onClose: () => void;
+  children: ReactNode;
+  title: string;
+  paragraph: string;
+  expertiseData?: any;
 }
 
 const backdropVariants = {
@@ -19,7 +26,15 @@ const modalVariants = {
   exit: { opacity: 0, y: '50%', scale: 0.8 },
 };
 
-export default function ContactModal({ isOpen, onClose }: ModalProps) {
+export default function Modal({
+  isOpen,
+  knowledgeSection,
+  onClose,
+  children,
+  title,
+  paragraph,
+  expertiseData,
+}: ModalProps) {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -45,7 +60,7 @@ export default function ContactModal({ isOpen, onClose }: ModalProps) {
           transition={{ duration: 0.3 }}
         >
           <motion.div
-            className="relative flex w-[80%] shadow-lg bg-[var(--white)] rounded-2xl overflow-hidden"
+            className="relative w-[80%] shadow-lg bg-[var(--white)] rounded-2xl "
             onClick={(e) => e.stopPropagation()}
             variants={modalVariants}
             initial="hidden"
@@ -53,34 +68,26 @@ export default function ContactModal({ isOpen, onClose }: ModalProps) {
             exit="exit"
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
           >
-            <div className="flex-1 p-12">
-              <div className="flex items-center gap-4">
-                <img
-                  src="/assets/ac-website-icon.svg"
-                  alt="icon"
-                  className="size-12"
-                />
-                <p className="font-syne font-bold text-xl">Andrés Cordero</p>
-              </div>
-            </div>
-
-            <div className="flex flex-col bg-[var(--black)] px-16 py-12 text-white w-[70%]">
+            <div className="bg-[var(--black)] px-16 py-12 rounded-2xl">
               <div className="absolute right-4 top-4" onClick={onClose}>
                 <DynamicButton
                   style="WHITE"
-                  name="Close"
+                  name="Become a client"
                   icon={IoCloseSharp}
                   type="icon-only"
                 />
               </div>
-              <div className="text-[var(--white)] font-semibold pb-8 font-dm-sans text-5xl cursor-default">
-                Title
+              <div className=" text-[var(--white)] font-semibold pb-8 font-dm-sans text-5xl  cursor-default">
+                {title}
               </div>
               <p className="font-inter text-base font-extralight text-[var(--gray)] break-words cursor-default">
-                PAragrapg
+                {paragraph}
               </p>
-              parrafo
+              {knowledgeSection && (
+                <ExpertiseSectionModalHeader expertiseData={expertiseData} />
+              )}
             </div>
+            <div className="p-16">{children}</div>
           </motion.div>
         </motion.div>
       )}

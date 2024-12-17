@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import ModalContact from '@components/common/modals/ContactModal';
+import ModalContact from '@components/common/modals/Modal';
 
 export default function DiscussionCarousel() {
   const [isHovered, setIsHovered] = useState(false);
