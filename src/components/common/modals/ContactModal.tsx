@@ -9,7 +9,6 @@ import { ExpertiseContactSection } from '@components/home/ExpertiseContactSectio
 import { GrDocumentPerformance } from 'react-icons/gr';
 import emailjs from 'emailjs-com';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import { Bounce, toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -42,6 +41,9 @@ export default function ContactModal({ isOpen, onClose }: ModalProps) {
     };
   }, [isOpen]);
 
+  // const [selectedHelp, setSelectedHelp] = useState<string[]>([]);
+  // const [otherHelp, setOtherHelp] = useState('');
+
   const {
     register,
     handleSubmit,
@@ -49,17 +51,49 @@ export default function ContactModal({ isOpen, onClose }: ModalProps) {
     reset,
   } = useForm();
 
-  const navigate = useNavigate();
-
   const onSubmit = (data: Record<string, unknown> | undefined) => {
-    const serviceId = 'service_utc4coe';
-    const templateId = 'template_sjykosj';
-    const userId = 'uk3CMh0gQ8aZWSmev';
+    // if (selectedHelp.length === 0) {
+    //   toast.error('Please select at least one option.', {
+    //     position: 'bottom-left',
+    //     autoClose: 5000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //     theme: 'light',
+    //     transition: Bounce,
+    //   });
+    //   return;
+    // }
 
-    emailjs.send(serviceId, templateId, data, userId).then(
+    const serviceId = 'service_4tnvqx8';
+    const templateId = 'template_jsty4d9';
+    const userId = 'UFG_EnlAJMQC_VCCO';
+
+    const emailData = {
+      fullName: data?.fullName || '',
+      mailAddress: data?.mailAddress || '',
+      message: data?.message || '',
+      // selectedHelp:
+      //   selectedHelp.length > 0 ? selectedHelp.join(', ') : 'Not specified',
+      // otherHelp: otherHelp || 'No additional details provided',
+    };
+
+    emailjs.send(serviceId, templateId, emailData, userId).then(
       () => {
         reset();
-        navigate('/contact/success');
+        toast.success('Mail sent:', {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+          transition: Bounce,
+        });
       },
       () => {
         toast.error('Error sending mail:', {
@@ -76,6 +110,22 @@ export default function ContactModal({ isOpen, onClose }: ModalProps) {
       },
     );
   };
+
+  // const handleHelpChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { value } = event.target;
+  //   setSelectedHelp((prevSelectedHelp) =>
+  //     prevSelectedHelp.includes(value)
+  //       ? prevSelectedHelp.filter((item) => item !== value)
+  //       : [...prevSelectedHelp, value],
+  //   );
+  // };
+
+  // const handleOtherHelpChange = (
+  //   event: React.ChangeEvent<HTMLInputElement>,
+  // ) => {
+  //   setOtherHelp(event.target.value);
+  // };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -129,7 +179,6 @@ export default function ContactModal({ isOpen, onClose }: ModalProps) {
                   text="Comprehensive QA strategies to maintain software excellence."
                   icon={GrDocumentPerformance}
                 />
-
                 <div className=" flex items-center justify-start gap-4  mt-auto ">
                   <div className="flex gap-6 pt-16">
                     <DynamicButton
@@ -217,11 +266,11 @@ export default function ContactModal({ isOpen, onClose }: ModalProps) {
 
                   <div className="mb-6">
                     <input
-                      id="email"
+                      id="mailAddress"
                       type="email"
                       placeholder="you@mail.com"
                       className="font-dm-sans w-full border-b bg-none px-3 py-2 bg-[var(--black)] focus:outline-none"
-                      {...register('email', {
+                      {...register('mailAddress', {
                         required: 'Email is mandatory',
                         pattern: {
                           value:
@@ -230,16 +279,69 @@ export default function ContactModal({ isOpen, onClose }: ModalProps) {
                         },
                       })}
                     />
-                    {errors.email && (
+                    {errors.mailAddress && (
                       <p className="text-sm font-syne font-semibold mt-2 text-red-500">
-                        {errors.email.message as React.ReactNode}
+                        {errors.mailAddress.message as React.ReactNode}
                       </p>
                     )}
                   </div>
 
+                  <div className="mb-6">
+                    <p className="font-syne text-var[--white]">
+                      Tell me a little about your project
+                    </p>
+                    <textarea
+                      id="message"
+                      placeholder="Explain a little..."
+                      className="font-dm-sans w-full border rounded-lg bg-none px-3 py-2 bg-[var(--black)] focus:outline-none"
+                      rows={3}
+                      {...register('message')}
+                    />
+                  </div>
+
+                  {/* <div className="mb-12">
+                    <p className="font-syne text-var[--white]">
+                      How can I help?
+                    </p>
+                    <div className="flex gap-4">
+                      {[
+                        'Project Management',
+                        'Software Development',
+                        'Business Analysis',
+                        'Front-End Development',
+                        'Branding',
+                        'Other',
+                      ].map((option) => (
+                        <label
+                          key={option}
+                          className="flex items-center gap-2 text-sm"
+                        >
+                          <input
+                            type="checkbox"
+                            value={option}
+                            onChange={handleHelpChange}
+                            checked={selectedHelp.includes(option)}
+                          />
+                          {option}
+                        </label>
+                      ))}
+                    </div>
+                    {selectedHelp.includes('Other') && (
+                      <div className="mt-4">
+                        <input
+                          type="text"
+                          placeholder="Please specify"
+                          value={otherHelp}
+                          onChange={handleOtherHelpChange}
+                          className="font-dm-sans w-full border-b bg-none px-3 py-2 bg-[var(--black)] focus:outline-none"
+                        />
+                      </div>
+                    )}
+                  </div> */}
+
                   <button
                     type="submit"
-                    className="w-full animate-gradient-random font-syne inline-block rounded-full bg-[var(--soft-light-gray)] bg-opacity-50 bg-gradient-to-r from-[var(--deep-navy-blue)] via-[var(--vibrant-sky-blue)] to-[var(--magenta-pink)] p-1 px-4 text-base font-semibold text-[var(--white)]"
+                    className="w-full animate-gradient-random font-syne inline-block rounded-full bg-[var(--soft-light-gray)] bg-opacity-50 bg-gradient-to-r from-[var(--deep-navy-blue)] via-[var(--vibrant-sky-blue)] to-[var(--magenta-pink)] p-4 px-4 text-base font-semibold text-[var(--white)]"
                   >
                     Let&apos;s get started!
                   </button>
