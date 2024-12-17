@@ -7,6 +7,11 @@ import { IoLogoWhatsapp, IoMdMail } from 'react-icons/io';
 import { FaProjectDiagram } from 'react-icons/fa';
 import { ExpertiseContactSection } from '@components/home/ExpertiseContactSection';
 import { GrDocumentPerformance } from 'react-icons/gr';
+import emailjs from 'emailjs-com';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { Bounce, toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface ModalProps {
   isOpen: boolean;
@@ -37,6 +42,40 @@ export default function ContactModal({ isOpen, onClose }: ModalProps) {
     };
   }, [isOpen]);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  const navigate = useNavigate();
+
+  const onSubmit = (data: Record<string, unknown> | undefined) => {
+    const serviceId = 'service_utc4coe';
+    const templateId = 'template_sjykosj';
+    const userId = 'uk3CMh0gQ8aZWSmev';
+
+    emailjs.send(serviceId, templateId, data, userId).then(
+      () => {
+        reset();
+        navigate('/contact/success');
+      },
+      () => {
+        toast.error('Error sending mail:', {
+          position: 'bottom-left',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+          transition: Bounce,
+        });
+      },
+    );
+  };
   return (
     <AnimatePresence>
       {isOpen && (
@@ -154,9 +193,58 @@ export default function ContactModal({ isOpen, onClose }: ModalProps) {
                 <p>Let&apos;s team Up!</p>
               </div>
               <p className="font-inter pb-8 text-xl font-extralight text-[var(--gray)] break-words cursor-default">
-                Tell me more about yourself and what's on your mind
+                Tell me more about yourself and what&apos;s on your mind
               </p>
-              <p>parrafo</p>
+              <div>
+                <ToastContainer />
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <div className="mb-4">
+                    <input
+                      id="fullName"
+                      type="text"
+                      placeholder="Your name"
+                      className="font-dm-sans w-full border-b bg-none px-3 py-2 bg-[var(--black)] focus:outline-none"
+                      {...register('fullName', {
+                        required: 'This field is required',
+                      })}
+                    />
+                    {errors.fullName && (
+                      <p className="text-sm font-syne font-semibold mt-2 text-red-500">
+                        {errors.fullName.message as React.ReactNode}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="mb-6">
+                    <input
+                      id="email"
+                      type="email"
+                      placeholder="you@mail.com"
+                      className="font-dm-sans w-full border-b bg-none px-3 py-2 bg-[var(--black)] focus:outline-none"
+                      {...register('email', {
+                        required: 'Email is mandatory',
+                        pattern: {
+                          value:
+                            /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+                          message: 'Enter a valid email address',
+                        },
+                      })}
+                    />
+                    {errors.email && (
+                      <p className="text-sm font-syne font-semibold mt-2 text-red-500">
+                        {errors.email.message as React.ReactNode}
+                      </p>
+                    )}
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full animate-gradient-random font-syne inline-block rounded-full bg-[var(--soft-light-gray)] bg-opacity-50 bg-gradient-to-r from-[var(--deep-navy-blue)] via-[var(--vibrant-sky-blue)] to-[var(--magenta-pink)] p-1 px-4 text-base font-semibold text-[var(--white)]"
+                  >
+                    Let&apos;s get started!
+                  </button>
+                </form>
+              </div>
             </div>
           </motion.div>
         </motion.div>
