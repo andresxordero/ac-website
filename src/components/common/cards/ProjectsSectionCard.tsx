@@ -1,7 +1,7 @@
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
 import { FaExternalLinkSquareAlt } from 'react-icons/fa';
 
-import { Button } from '../Button';
+import { DynamicButton } from '../buttons/DynamicButton';
 import { ProjectsSectionCardProps } from '@mocks/ProjectsSectionMocks';
 
 interface ProjectsSectionCardImage extends ProjectsSectionCardProps {
@@ -27,13 +27,13 @@ export default function ProjectsSectionCard({
           {title}
         </h3>
 
-        {/* <Button
+        <DynamicButton
           style="WHITE"
           type="full-static"
           icon={FaExternalLinkSquareAlt}
           name="View Project"
           onClick={handleOpenLink}
-        /> */}
+        />
       </div>
     </div>
   );

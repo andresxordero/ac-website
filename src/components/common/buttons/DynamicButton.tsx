@@ -1,4 +1,4 @@
-type ButtonProps = {
+type DynamicButtonProps = {
   icon?: React.ElementType;
   name: string;
   type: 'icon-only' | 'full-static' | 'full-dynamic' | 'text-only';
@@ -6,13 +6,13 @@ type ButtonProps = {
   onClick?: () => void;
 };
 
-export function Button({
+export function DynamicButton({
   icon: Icon,
   name,
   type,
   style,
   onClick,
-}: ButtonProps) {
+}: DynamicButtonProps) {
   const whiteBaseClasses =
     'font-dm-sans group relative hover:bg-[var(--soft-light-gray)] flex items-center justify-center rounded-full text-sm border hover:border-[var(--black)] border-[var(--soft-light-gray)] bg-[var(--white)] p-2 text-[var(--black)] transition-all duration-500 ease-in-out';
 
@@ -78,7 +78,7 @@ export function Button({
   );
 }
 
-Button.defaultProps = {
+DynamicButton.defaultProps = {
   icon: null,
   onClick: () => null,
 };

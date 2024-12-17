@@ -1,14 +1,10 @@
 /* eslint-disable tailwindcss/no-custom-classname */
-import {
-  FaGithub,
-  FaLinkedinIn,
-  FaTelegramPlane,
-  FaArrowRight,
-} from 'react-icons/fa';
+import { FaGithub, FaLinkedinIn, FaTelegramPlane } from 'react-icons/fa';
 import { HiDocumentDownload } from 'react-icons/hi';
 import { IoLogoWhatsapp, IoMdMail } from 'react-icons/io';
 
-import { Button } from './Button';
+import { DynamicButton } from './buttons/DynamicButton';
+import { ContactButton } from './buttons/ContactButton';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -28,7 +24,7 @@ export default function Footer() {
           </div>
 
           <div className="flex gap-6 pt-16">
-            <Button
+            <DynamicButton
               style="WHITE"
               type="full-dynamic"
               icon={FaGithub}
@@ -37,7 +33,7 @@ export default function Footer() {
                 window.open('https://github.com/andrescordero-cbqa', '_blank')
               }
             />
-            <Button
+            <DynamicButton
               style="WHITE"
               type="full-dynamic"
               icon={FaGithub}
@@ -46,7 +42,7 @@ export default function Footer() {
                 window.open('https://github.com/andrescorderor', '_blank')
               }
             />
-            <Button
+            <DynamicButton
               style="WHITE"
               type="full-dynamic"
               icon={FaLinkedinIn}
@@ -58,14 +54,14 @@ export default function Footer() {
                 )
               }
             />
-            <Button
+            <DynamicButton
               style="WHITE"
               type="full-dynamic"
               icon={HiDocumentDownload}
               name="Download Resume"
               onClick={() => window.open('/assets/Resume.pdf', '_blank')}
             />
-            <Button
+            <DynamicButton
               style="WHITE"
               type="full-dynamic"
               icon={IoMdMail}
@@ -74,7 +70,7 @@ export default function Footer() {
                 window.open('mailto:andresmcorderor@gmail.com', '_blank')
               }
             />
-            <Button
+            <DynamicButton
               style="WHITE"
               type="full-dynamic"
               icon={IoLogoWhatsapp}
@@ -83,7 +79,7 @@ export default function Footer() {
                 window.open('https://wa.me/524777037913', '_blank')
               }
             />
-            <Button
+            <DynamicButton
               style="WHITE"
               type="full-dynamic"
               icon={FaTelegramPlane}
@@ -94,17 +90,7 @@ export default function Footer() {
             />
           </div>
         </div>
-        <div>
-          <div className="font-syne flex items-center justify-center gap-4 font-bold">
-            Lets get in contact
-            <Button
-              style="WHITE"
-              name="Become a client"
-              icon={FaArrowRight}
-              type="icon-only"
-            />
-          </div>
-        </div>
+        <ContactButton />
       </div>
       <div className="animate-gradient-rotate h-1 w-full bg-gradient-to-r from-[var(--deep-navy-blue)] via-[var(--vibrant-sky-blue)] to-[var(--magenta-pink)]" />
       <p className="font-dm-sans pointer-events-none my-4 text-center text-sm text-[var(--black)] ">

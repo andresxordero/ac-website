@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { FaPlus } from 'react-icons/fa';
-import ModalContact from '../modals/Modal';
+import ModalContact from '../modals/ContactModal';
 import { ExpertiseSectionImage } from '@mocks/ExpertiseSectionMocks';
 
 interface CardProps {

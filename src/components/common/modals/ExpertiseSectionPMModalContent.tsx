@@ -1,5 +1,4 @@
-import { Button } from '../Button';
-import { FaArrowRight } from 'react-icons/fa';
+import { ContactButton } from '../buttons/ContactButton';
 
 export default function ExpertiseSectionPMModalContent() {
   return (
@@ -8,14 +7,8 @@ export default function ExpertiseSectionPMModalContent() {
         <h3 className="text-5xl font-semibold font-dm-sans text-[var(--black)] mb-4">
           About my work
         </h3>
-        <div className="font-syne flex items-center justify-start gap-4 font-bold mt-auto ">
-          Lets get in contact
-          <Button
-            style="WHITE"
-            name="Become a client"
-            icon={FaArrowRight}
-            type="icon-only"
-          />
+        <div className=" flex items-center justify-start gap-4 font-bold mt-auto ">
+          <ContactButton />
         </div>
       </div>
       <div className="col-span-2  text-base ">

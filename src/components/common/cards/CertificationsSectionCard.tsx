@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { CertificationsSectionCardProps } from '@mocks/CertificationsSectionMocks';
 import { HiOutlineExternalLink } from 'react-icons/hi';
-import { Button } from '../Button';
+import { DynamicButton } from '../buttons/DynamicButton';
 
 export default function CertificationsSectionCard({
   link,
@@ -39,7 +39,7 @@ export default function CertificationsSectionCard({
           <p className="text-sm">{subtitle}</p>
         </div>
         <div className="flex w-1/2 flex-col items-end justify-end">
-          <Button
+          <DynamicButton
             style="WHITE"
             type="full-dynamic"
             icon={HiOutlineExternalLink}

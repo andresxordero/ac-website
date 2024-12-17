@@ -2,7 +2,7 @@ import { ReactNode, useEffect } from 'react';
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { IoCloseSharp } from 'react-icons/io5';
-import { Button } from '../Button';
+import { DynamicButton } from '../buttons/DynamicButton';
 import ExpertiseSectionModalHeader from './ExpertiseSectionModalHeader';
 
 interface ModalProps {
@@ -26,7 +26,7 @@ const modalVariants = {
   exit: { opacity: 0, y: '50%', scale: 0.8 },
 };
 
-export default function ModalContact({
+export default function ContactModal({
   isOpen,
   knowledgeSection,
   onClose,
@@ -70,7 +70,7 @@ export default function ModalContact({
           >
             <div className="bg-[var(--black)] px-16 py-12 rounded-2xl">
               <div className="absolute right-4 top-4" onClick={onClose}>
-                <Button
+                <DynamicButton
                   style="WHITE"
                   name="Become a client"
                   icon={IoCloseSharp}

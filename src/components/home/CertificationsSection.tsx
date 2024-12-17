@@ -7,7 +7,7 @@ import 'keen-slider/keen-slider.min.css';
 
 import CertificationsSectionCard from '@components/common/cards/CertificationsSectionCard';
 import { certificationsSectionMocks } from '@mocks/CertificationsSectionMocks';
-import { Button } from '@components/common/Button';
+import { DynamicButton } from '@components/common/buttons/DynamicButton';
 import { GrLinkNext, GrLinkPrevious } from 'react-icons/gr';
 
 export default function CertificationsSection() {
@@ -59,7 +59,7 @@ export default function CertificationsSection() {
         ))}
       </div>
       <div className="absolute left-8 top-1/2 transform -translate-y-1/2  ">
-        <Button
+        <DynamicButton
           style="BLACK"
           type="icon-only"
           name="NextButton"
@@ -68,7 +68,7 @@ export default function CertificationsSection() {
         />
       </div>
       <div className="absolute right-8 top-1/2 transform -translate-y-1/2 ">
-        <Button
+        <DynamicButton
           style="BLACK"
           type="icon-only"
           name="NextButton"

@@ -2,8 +2,6 @@
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
 import { useEffect, useState } from 'react';
 
-import { Button } from './Button';
-
 export default function Header() {
   const [showNavbar, setShowNavbar] = useState(true);
 
@@ -40,7 +38,7 @@ export default function Header() {
             Andrés Cordero.
           </p> */}
         </div>
-        {/* <Button type="full-static" name="Language" style="WHITE" /> */}
+        {/* <DynamicButton type="full-static" name="Language" style="WHITE" /> */}
       </div>
     </nav>
   );
